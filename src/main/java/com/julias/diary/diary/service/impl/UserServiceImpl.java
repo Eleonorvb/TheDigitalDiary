@@ -22,6 +22,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     Utils utils;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public UserDto createUser(UserDto user) {
@@ -30,10 +33,12 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(user.getEmail()) !=null) throw new RuntimeException("DENNA FINNS REDAN");
         UserEntity userEntity= new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
-        String publicUserId=utils.generateUserId(40);
 
+
+        String publicUserId=utils.generateUserId(30);
         userEntity.setUserId(publicUserId);
-        userEntity.setEncryptedPassword("fuck");
+
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
 
         //Will take user Entity and save to Database
@@ -47,4 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
+        return null;
+    }
 }

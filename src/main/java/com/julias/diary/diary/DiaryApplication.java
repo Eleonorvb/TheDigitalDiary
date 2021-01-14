@@ -12,4 +12,9 @@ public class DiaryApplication {
         SpringApplication.run(DiaryApplication.class, args);
     }
 
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder ();
+    }
 }
