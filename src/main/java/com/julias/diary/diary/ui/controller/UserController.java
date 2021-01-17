@@ -14,16 +14,18 @@ import org.springframework.web.bind.annotation.*;
 //http://localhost:8080/users
 public class UserController {
 
-
-
     @Autowired
     UserService userService;
 
 
     //GET is used to request data from a specified resource.
-    @GetMapping
-    public  String getUser(){
-        return "get user was called";
+    @GetMapping (path = "/{id}")
+    public UserRest getUser(@PathVariable String id){
+        UserRest returnValue = new UserRest();
+
+        UserDto userDto = userService.getUserByUserId(id);
+        BeanUtils.copyProperties(userDto,returnValue);
+        return returnValue;
     }
 
 // POST is used to send data to a server to create
