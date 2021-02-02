@@ -1,15 +1,14 @@
 package com.julias.diary.diary.service.impl;
 
 
-import com.julias.diary.diary.io.entity.DiaryEntity;
 import com.julias.diary.diary.io.entity.PostEntity;
 import com.julias.diary.diary.repository.DiaryRepository;
 import com.julias.diary.diary.repository.PostRepository;
-import com.julias.diary.diary.repository.UserRepository;
 import com.julias.diary.diary.service.PostService;
-import com.julias.diary.diary.shared.dto.DiaryDto;
 import com.julias.diary.diary.shared.dto.PostDto;
 import com.julias.diary.diary.shared.utils.Utils;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,7 @@ public class PostServiceImpl implements PostService {
     @Autowired
     Utils utils;
 
+    private PostMapper postMapper = Mappers.getMapper(PostMapper.class);
 
     @Override
     public PostDto createPost(PostDto post) {
@@ -45,6 +45,16 @@ public class PostServiceImpl implements PostService {
         PostDto returnValue= new PostDto();
         BeanUtils.copyProperties(storedPostDetails, returnValue);
 
+        return returnValue;
+    }
+
+    @Override
+    public PostDto upDatePost(PostDto post) {
+        PostEntity postEntity = postRepository.findByPostId(post.getPostId());
+        postMapper.updatePostFromDto(post, postEntity);
+        PostEntity storedPostDetails = postRepository.save(postEntity);
+        PostDto returnValue= new PostDto();
+        BeanUtils.copyProperties(storedPostDetails, returnValue);
         return returnValue;
     }
 
@@ -71,10 +81,18 @@ public class PostServiceImpl implements PostService {
             postDto.setPostTitle(post.getPostTitle());
             postDto.setPostText(post.getPostText());
             postDto.setDiaryId(post.getDiaryEntity().getDiaryId());
-
-
             returnValue.add(postDto);
         }
         return returnValue;
+    }
+
+    @Override
+    public String deletePostByPostId(String postId) {
+        PostEntity postEntity = postRepository.findByPostId(postId);
+        if (postEntity == null) throw  new RuntimeException(postId);
+
+        postRepository.delete(postEntity);
+
+        return "Post deleted";
     }
 }

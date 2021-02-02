@@ -34,7 +34,11 @@ public class PostController {
         return returnValue;
     }
 
-
+    @DeleteMapping(path = "/{id}")
+    public String deletePostByPostId(@PathVariable String id) {
+        String deleteResponse = postService.deletePostByPostId(id);
+        return deleteResponse;
+    }
 
     //Metod för att hämta alla post som tillhör en diary
 
@@ -65,4 +69,20 @@ public class PostController {
 
         return returnValue;
     }
+
+    @PutMapping
+    public PostRest updatePost(@RequestBody PostRequest postDetails){
+
+        PostRest returnValue = new PostRest();
+        PostDto postDto = new PostDto();
+        BeanUtils.copyProperties(postDetails, postDto);
+
+        PostDto createdPost = postService.upDatePost(postDto);
+        BeanUtils.copyProperties(createdPost, returnValue);
+
+        return returnValue;
+    }
+
+
+
 }

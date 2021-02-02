@@ -1,19 +1,9 @@
 package com.julias.diary.diary.ui.model.response;
 
 public class PostRest {
-    private String diaryId;
     private String postText;
     private String postTitle;
     private String postId;
-
-
-    public String getDiaryId() {
-        return diaryId;
-    }
-
-    public void setDiaryId(String diaryId) {
-        this.diaryId = diaryId;
-    }
 
     public String getPostText() {
         return postText;
