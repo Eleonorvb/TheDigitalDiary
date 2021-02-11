@@ -17,8 +17,7 @@ public class PostEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
-    @Column(nullable =false)
+    @Column(nullable =false, columnDefinition = "TEXT")
     private String postText;
     @Column(nullable =false)
     private String postTitle;

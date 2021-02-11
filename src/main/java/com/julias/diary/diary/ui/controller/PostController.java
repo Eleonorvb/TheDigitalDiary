@@ -5,6 +5,7 @@ import com.julias.diary.diary.service.DiaryService;
 import com.julias.diary.diary.service.PostService;
 import com.julias.diary.diary.shared.dto.DiaryDto;
 import com.julias.diary.diary.shared.dto.PostDto;
+import com.julias.diary.diary.shared.utils.Crypt;
 import com.julias.diary.diary.ui.model.request.DiaryRequestModel;
 import com.julias.diary.diary.ui.model.request.PostRequest;
 import com.julias.diary.diary.ui.model.response.DiaryRest;
@@ -13,6 +14,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +32,20 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    Crypt crypt;
+
     //GET is used to request data from a specified resource.
     @GetMapping(path = "/{id}")
-    public PostRest getPost(@PathVariable String id){
+    public PostRest getPost(@PathVariable String id) throws InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException {
         PostRest returnValue = new PostRest();
 
         PostDto postDto = postService.getPost(id);
         BeanUtils.copyProperties(postDto,returnValue);
+
+        returnValue.setPostText(crypt.decrypt(returnValue.getPostText()));
+        returnValue.setPostTitle(crypt.decrypt(returnValue.getPostTitle()));
+
         return returnValue;
     }
 
@@ -43,13 +58,15 @@ public class PostController {
     //Metod för att hämta alla post som tillhör en diary
 
     @GetMapping(path = "/diary/{id}")
-    public List<PostRest> getPostsByDiaryId(@PathVariable String id){
+    public List<PostRest> getPostsByDiaryId(@PathVariable String id) throws InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException {
         List<PostRest> returnValue = new ArrayList<PostRest>();
         List<PostDto> postdto = postService.getPostsByDiaryId(id);
 
         for (PostDto postdtos: postdto){
             PostRest postRest=new PostRest();
             BeanUtils.copyProperties(postdtos,postRest);
+            postRest.setPostTitle(crypt.decrypt(postRest.getPostTitle()));
+            postRest.setPostText(crypt.decrypt(postRest.getPostText()));
             returnValue.add(postRest);
         }
         return returnValue;
@@ -58,27 +75,39 @@ public class PostController {
 
 
     @PostMapping
-    public PostRest createPost(@RequestBody PostRequest postDetails){
+    public PostRest createPost(@RequestBody PostRequest postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         PostRest returnValue = new PostRest();
         PostDto postDto = new PostDto();
         BeanUtils.copyProperties(postDetails, postDto);
 
+        postDto.setPostText(crypt.encrypt(postDto.getPostText()));
+        postDto.setPostTitle(crypt.encrypt(postDto.getPostTitle()));
+
         PostDto createdPost = postService.createPost(postDto);
         BeanUtils.copyProperties(createdPost, returnValue);
+
+        returnValue.setPostTitle(crypt.decrypt(returnValue.getPostTitle()));
+        returnValue.setPostText(crypt.decrypt(returnValue.getPostText()));
 
         return returnValue;
     }
 
     @PutMapping
-    public PostRest updatePost(@RequestBody PostRequest postDetails){
+    public PostRest updatePost(@RequestBody PostRequest postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
 
         PostRest returnValue = new PostRest();
         PostDto postDto = new PostDto();
         BeanUtils.copyProperties(postDetails, postDto);
 
+        postDto.setPostText(crypt.encrypt(postDto.getPostText()));
+        postDto.setPostTitle(crypt.encrypt(postDto.getPostTitle()));
+
         PostDto createdPost = postService.upDatePost(postDto);
         BeanUtils.copyProperties(createdPost, returnValue);
+
+        returnValue.setPostTitle(crypt.decrypt(returnValue.getPostTitle()));
+        returnValue.setPostText(crypt.decrypt(returnValue.getPostText()));
 
         return returnValue;
     }

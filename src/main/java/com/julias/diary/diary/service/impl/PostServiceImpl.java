@@ -6,6 +6,7 @@ import com.julias.diary.diary.repository.DiaryRepository;
 import com.julias.diary.diary.repository.PostRepository;
 import com.julias.diary.diary.service.PostService;
 import com.julias.diary.diary.shared.dto.PostDto;
+import com.julias.diary.diary.shared.utils.Crypt;
 import com.julias.diary.diary.shared.utils.Utils;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,6 +14,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +57,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto upDatePost(PostDto post) {
+    public PostDto upDatePost(PostDto post)  {
         PostEntity postEntity = postRepository.findByPostId(post.getPostId());
         postMapper.updatePostFromDto(post, postEntity);
         PostEntity storedPostDetails = postRepository.save(postEntity);
