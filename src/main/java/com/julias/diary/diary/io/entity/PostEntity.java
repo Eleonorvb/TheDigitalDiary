@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @Entity
@@ -17,19 +18,19 @@ public class PostEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable =false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String postText;
-    @Column(nullable =false)
+    @Column(nullable = false)
     private String postTitle;
 
-    @Column(nullable =false)
+    @Column(nullable = true)
+    private LocalDate localDate;
+
+    @Column(nullable = false)
     private String postId;
 
-
-
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="diary_id", nullable = false)
+    @JoinColumn(name = "diary_id", nullable = false)
     private DiaryEntity diaryEntity;
 
 
@@ -72,4 +73,8 @@ public class PostEntity implements Serializable {
     public void setDiaryEntity(DiaryEntity diaryEntity) {
         this.diaryEntity = diaryEntity;
     }
+
+    public LocalDate getLocalDate() { return localDate; }
+
+    public void setLocalDate(LocalDate localDate) { this.localDate = localDate; }
 }

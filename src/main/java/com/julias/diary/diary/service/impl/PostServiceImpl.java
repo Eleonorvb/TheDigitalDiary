@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class PostServiceImpl implements PostService {
         postEntity.setPostId(publicPostId);
         postEntity.setPostTitle(post.getPostTitle());
         postEntity.setDiaryEntity(diaryRepository.findByDiaryId(post.getDiaryId()));
+        postEntity.setLocalDate(LocalDate.now());
 
         PostEntity storedPostDetails = postRepository.save(postEntity);
 
@@ -60,6 +62,7 @@ public class PostServiceImpl implements PostService {
     public PostDto upDatePost(PostDto post)  {
         PostEntity postEntity = postRepository.findByPostId(post.getPostId());
         postMapper.updatePostFromDto(post, postEntity);
+        postEntity.setLocalDate(LocalDate.now());
         PostEntity storedPostDetails = postRepository.save(postEntity);
         PostDto returnValue= new PostDto();
         BeanUtils.copyProperties(storedPostDetails, returnValue);
@@ -88,6 +91,7 @@ public class PostServiceImpl implements PostService {
             postDto.setPostId(post.getPostId());
             postDto.setPostTitle(post.getPostTitle());
             postDto.setPostText(post.getPostText());
+            postDto.setLocalDate(post.getLocalDate());
             postDto.setDiaryId(post.getDiaryEntity().getDiaryId());
             returnValue.add(postDto);
         }

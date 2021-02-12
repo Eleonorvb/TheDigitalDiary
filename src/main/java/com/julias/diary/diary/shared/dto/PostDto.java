@@ -1,6 +1,7 @@
 package com.julias.diary.diary.shared.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class PostDto implements Serializable {
 
@@ -9,6 +10,7 @@ public class PostDto implements Serializable {
     private String postText;
     private String postTitle;
     private String postId;
+    private LocalDate localDate;
 
 
     public String getPostId() {
@@ -42,4 +44,8 @@ public class PostDto implements Serializable {
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
     }
+
+    public LocalDate getLocalDate() { return localDate; }
+
+    public void setLocalDate(LocalDate localDate) { this.localDate = localDate; }
 }

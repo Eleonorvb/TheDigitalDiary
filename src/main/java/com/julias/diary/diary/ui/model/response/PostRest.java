@@ -1,9 +1,12 @@
 package com.julias.diary.diary.ui.model.response;
 
+import java.time.LocalDate;
+
 public class PostRest {
     private String postText;
     private String postTitle;
     private String postId;
+    private LocalDate localDate;
 
     public String getPostText() {
         return postText;
@@ -27,5 +30,13 @@ public class PostRest {
 
     public void setPostId(String postId) {
         this.postId = postId;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 }
