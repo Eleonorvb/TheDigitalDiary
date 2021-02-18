@@ -25,6 +25,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Service class for handling CRUD for Post object
+ */
+
+
 @Service
 public class PostServiceImpl implements PostService {
 

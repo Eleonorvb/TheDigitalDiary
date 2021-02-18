@@ -7,8 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+/*
+Repository class used to fetch data from database
+ */
 
+@Repository
 public interface DiaryRepository extends CrudRepository<DiaryEntity, Long> {
     List<DiaryEntity> findByUserEntity_userId(String userId);
     DiaryEntity findByDiaryId(String diaryId);

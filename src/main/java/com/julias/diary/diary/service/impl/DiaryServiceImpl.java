@@ -16,6 +16,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Service class for handling CRUD for Diary object
+ */
+
 @Service
 public class DiaryServiceImpl implements DiaryService {
     @Autowired

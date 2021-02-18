@@ -1,5 +1,9 @@
 package com.julias.diary.diary.ui.model.request;
 
+/*
+The client request model for the user object
+ */
+
 public class UserDetailsRequestModel {
 
     private String firstName;

@@ -3,6 +3,10 @@ package com.julias.diary.diary.shared.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/*
+Data transfer object for the Post object
+ */
+
 public class PostDto implements Serializable {
 
     private static final long serialVersionUID = 1L;

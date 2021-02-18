@@ -1,7 +1,10 @@
 package com.julias.diary.diary.ui.model.response;
 
 
-//innehåller bara de detaljer som vi vill returnera mot användaren, vi vill inte att lösenord ska tillbaka tex.
+/*
+The client response model for the user request
+ */
+
 public class UserRest {
     private String userId;
     private String firstName;

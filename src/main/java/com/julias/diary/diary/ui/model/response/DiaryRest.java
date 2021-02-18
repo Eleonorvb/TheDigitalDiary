@@ -1,5 +1,9 @@
 package com.julias.diary.diary.ui.model.response;
 
+/*
+The client response model for the diary request
+ */
+
 public class DiaryRest {
     private String title;
     private String diaryId;

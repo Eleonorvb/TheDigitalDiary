@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/*
+Service class for handling CRUD for User object
+ */
 
 @Service
 public class UserServiceImpl implements UserService {

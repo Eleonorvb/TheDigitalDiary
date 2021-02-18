@@ -4,6 +4,10 @@ import com.julias.diary.diary.io.entity.UserEntity;
 
 import java.io.Serializable;
 
+/*
+Data transfer object for the Diary object
+ */
+
 public class DiaryDto implements Serializable {
 
     private String userId;

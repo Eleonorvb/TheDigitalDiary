@@ -7,6 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+/*
+Helper class to edit attributes of an object (Put request)
+ */
+
 @Mapper(componentModel= "Spring")
 public interface PostMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

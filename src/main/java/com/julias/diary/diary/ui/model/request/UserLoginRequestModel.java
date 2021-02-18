@@ -1,5 +1,9 @@
 package com.julias.diary.diary.ui.model.request;
 
+/*
+The client request model for the user login request
+ */
+
 public class UserLoginRequestModel {
     private String email;
     private String password;

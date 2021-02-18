@@ -1,5 +1,9 @@
 package com.julias.diary.diary.security;
 
+/*
+Constants used for the JWT-token
+ */
+
 public class SecurityConstants {
     public static final long EXPIRATION_TIME = 86400000;
     public static final String TOKEN_PREFIX = "Bearer";

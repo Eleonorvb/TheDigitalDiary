@@ -1,12 +1,15 @@
 package com.julias.diary.diary.ui.model.request;
 
-public class PostRequest {
+/*
+The client request model for the post object
+ */
+
+public class PostRequestModel {
 
     private String diaryId;
     private String postText;
     private String postTitle;
     private String postId;
-
 
     public String getDiaryId() {
         return diaryId;

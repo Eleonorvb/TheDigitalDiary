@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 import java.security.SecureRandom;
 import java.util.Random;
 
+/*
+   Helper class to generate random Strings
+ */
+
 @Component
 public class Utils {
     private final Random RANDOM= new SecureRandom();

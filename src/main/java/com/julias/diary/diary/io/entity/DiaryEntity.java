@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Entity
 public class DiaryEntity implements Serializable {
     private static final long serialVersionUID = 7032980759075504261L;

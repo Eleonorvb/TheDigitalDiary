@@ -11,6 +11,10 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+/*
+Interface with methods for the PostService
+ */
+
 public interface PostService {
     PostDto createPost (PostDto post);
     PostDto upDatePost (PostDto post) throws NoSuchPaddingException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException;

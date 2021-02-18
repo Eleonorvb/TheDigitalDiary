@@ -19,6 +19,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+RestController for the diary object with CRUD endpoints
+ */
+
 @RestController
 @RequestMapping("diary")
 public class DiaryController {

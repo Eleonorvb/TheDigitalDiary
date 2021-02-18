@@ -14,6 +14,10 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+/*
+Class used for encryption and decryption of data saved to database
+ */
+
 @Component
 public class Crypt {
 

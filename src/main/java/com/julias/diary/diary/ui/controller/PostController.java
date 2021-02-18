@@ -1,14 +1,10 @@
 package com.julias.diary.diary.ui.controller;
 
 
-import com.julias.diary.diary.service.DiaryService;
 import com.julias.diary.diary.service.PostService;
-import com.julias.diary.diary.shared.dto.DiaryDto;
 import com.julias.diary.diary.shared.dto.PostDto;
 import com.julias.diary.diary.shared.utils.Crypt;
-import com.julias.diary.diary.ui.model.request.DiaryRequestModel;
-import com.julias.diary.diary.ui.model.request.PostRequest;
-import com.julias.diary.diary.ui.model.response.DiaryRest;
+import com.julias.diary.diary.ui.model.request.PostRequestModel;
 import com.julias.diary.diary.ui.model.response.PostRest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +19,10 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+RestController for the post object with CRUD endpoints
+ */
 
 @RestController
 @RequestMapping("posts")
@@ -75,7 +75,7 @@ public class PostController {
 
 
     @PostMapping
-    public PostRest createPost(@RequestBody PostRequest postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public PostRest createPost(@RequestBody PostRequestModel postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         PostRest returnValue = new PostRest();
         PostDto postDto = new PostDto();
@@ -94,7 +94,7 @@ public class PostController {
     }
 
     @PutMapping
-    public PostRest updatePost(@RequestBody PostRequest postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+    public PostRest updatePost(@RequestBody PostRequestModel postDetails) throws NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
 
         PostRest returnValue = new PostRest();
         PostDto postDto = new PostDto();

@@ -3,7 +3,10 @@ package com.julias.diary.diary.shared.dto;
 
 import java.io.Serializable;
 
-//Data transfer object. kommunicerar mellan alla lager
+/*
+Data transfer object for the User object
+ */
+
 public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;

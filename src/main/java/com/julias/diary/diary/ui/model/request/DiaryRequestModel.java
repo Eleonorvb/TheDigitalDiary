@@ -1,5 +1,9 @@
 package com.julias.diary.diary.ui.model.request;
 
+/*
+The client request model for the diary object
+ */
+
 public class DiaryRequestModel {
     private String diaryId;
     private String userId;

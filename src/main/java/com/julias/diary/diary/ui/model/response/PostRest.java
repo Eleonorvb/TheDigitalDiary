@@ -2,6 +2,10 @@ package com.julias.diary.diary.ui.model.response;
 
 import java.time.LocalDate;
 
+/*
+The client response model for the post request
+ */
+
 public class PostRest {
     private String postText;
     private String postTitle;
